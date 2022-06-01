@@ -23,7 +23,7 @@
     <script>
         function successFunction(data) {
   var allRows = data.split(/\r?\n|\r/);
-  var table = '<table border="1" cellspacing="5" cellpadding="5">';
+  var table = '<table border="1">';
   for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
     if (singleRow === 0) {
       table += '<thead>';
