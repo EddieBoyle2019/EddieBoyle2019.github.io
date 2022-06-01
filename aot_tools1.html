@@ -33,14 +33,22 @@
     }
     var rowCells = allRows[singleRow].split(',');
     //for (var rowCell = 0; rowCell < rowCells.length; rowCell++) {
-    for (var rowCell = 0; rowCell < 3; rowCell++) {
+    for (var rowCell = 0; rowCell < 4; rowCell++) {
       if (singleRow === 0) {
         table += '<th>';
         table += rowCells[rowCell];
         table += '</th>';
       } else {
         table += '<td>';
-        table += rowCells[rowCell];
+        if (rowCell < 3)
+        {    
+            table += rowCells[rowCell];
+
+        }
+        else
+        {
+            table += "UKWA HTTP response";
+        }
         table += '</td>';
       }
     }
@@ -108,7 +116,7 @@
 
   <div class="row-fluid">
     <div class="span12">
-      <h3>This prototype demonstrator uses a list of records in a collection exported from the ACT as a CSV file, and gets their current web archive status</h3>
+      <h4>This prototype demonstrator uses a list of records in a collection (sample: Topics and Themes > British Stand-up Comedy Archive > Comedians)exported from the ACT as a CSV file, and gets their current web archive status</h4>
     </div>
   </div>
 
