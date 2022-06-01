@@ -56,11 +56,18 @@
   $('body').append(table);
 }
 
+function successFunction2(data) {
+    array = $.csv.toArrays(data);
+    $('body').append(array[1][2]);
+}
+
     $.ajax({
     url: 'ACT_target-export_669.csv',
     dataType: 'text',
-    }).done(successFunction);
+    }).done(successFunction2);
     </script>
+
+
 
 </head>
 
