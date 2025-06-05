@@ -1,4 +1,4 @@
-## FORTH2O Data Hub
+## FORTH2O Data Lab
 ### Data pipeline
 
 #### 1. Postgres
