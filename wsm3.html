@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Quick Start - Leaflet</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <!--Add the Ordnance Survey Styling-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OrdnanceSurvey/os-api-branding@0.3.1/os-api-branding.css" />
+    <!--<script src="https://cdn.jsdelivr.net/gh/OrdnanceSurvey/os-api-branding@0.3.1/os-api-branding.js"></script>-->
+
+    <!--Add the Leaflet libraries-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<div>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #1799cb;"> <!-- Dark Blue Background -->
+            <div class="container-fluid">
+                <a class="navbar-brand">
+                    <img src="logo.png" alt="F2O" class="logo" style="height: 60px">
+                </a> 
+                <div style="color:white">Water Story Maps</div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Explore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Insights</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+	<style>
+		body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+	</style>
+
+    <!-- Custom CSS for Blue and Dark Green Theme -->
+    <style>
+    .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff; /* White text color for links */
+        font-size: 1.2rem; /* Increase text size */
+        padding: 10px 15px; /* Add padding for better spacing */
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:hover {
+        background-color: #11656A; /* Dark Green on hover */
+        color: #ffffff; /* Keep text white */
+        text-decoration: none; /* Remove underline on hover */
+        border-radius: 5px; /* Rounded corners for hover */
+    }
+
+    .navbar-dark .navbar-nav .nav-link.active {
+        color: #ffd700; /* Gold color for active link */
+        background-color: #11656A; /* Slightly darker green for active state */
+    }
+
+    /* Optional: Accessible Focus Style */
+    .navbar-dark .navbar-nav .nav-link:focus {
+        outline: 3px solid #ffd700; /* Gold outline for focus state */
+        outline-offset: 2px;
+    }
+
+    /* Make the logo stand out with a white background */
+    .navbar-brand .logo {
+        background-color: #ffffff; /* White background for the logo box */
+        border: 3px solid #ffffff; /* White border around the logo */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+        padding: 5px; /* Padding around the image */
+    }
+    </style>
+
+    <style>
+		/*.leaflet-control-container { position: absolute; top: 100px }*/
+		.leaflet-control-zoom { position: absolute; top: 100px }*/
+		.leaflet-control-scale { margin-bottom: 0 !important; }
+		//.leaflet-control-attribution { clear: none !important; }
+		.leaflet-control-attribution { margin-bottom: 0 !important; }
+		//.leaflet-popup-content-wrapper .leaflet-popup-content {position: relative;top: 100px}
+		.leaflet-popup-content-wrapper {position: relative;top: 100px}
+		//.leaflet-popup-content {position: relative;top: 100px}
+		//.leaflet-popup-tip-container {position: relative;top: 100px}
+	</style>
+
+</head>
+
+<body>
+
+<div id="map" class="map">
+	<!--<div class="os-api-branding logo" style="bottom:50px;"></div>
+	<div class="os-api-branding copyright"></div>-->
+</div>
+
+        <!--OS attribute logo-->
+        <script src="https://cdn.jsdelivr.net/gh/OrdnanceSurvey/os-api-branding@0.3.1/os-api-branding.js"></script>
+        <style>
+        .os-api-branding.logo {bottom:50px;}
+        .os-api-branding.copyright {bottom:20px;}
+    	</style>
+
+<script>
+
+	// OS Data Hub API Key
+	const apiKey = 'hY9nIzYSGV9A9kaF8ScWbl7wghXs6P6j';
+
+// Initialize the map.
+    const mapOptions = {
+        minZoom: 7,
+        maxZoom: 20,
+        center: [ 56.0, -3.72 ],
+        zoom: 10,
+        maxBounds: [
+            [ 49.528423, -10.76418 ],
+            [ 61.331151, 1.9134116 ]
+        ],
+        //attributionControl: false
+    };
+
+	//const map = L.map('map').setView([56.0, -3.72], 10);
+	const map = L.map('map', mapOptions);
+
+	// Load and display ZXY tile layer on the map.
+	url = "https://api.os.uk/maps/raster/v1/zxy/Light_3857/{z}/{x}/{y}.png?key=" + apiKey;
+    //const basemap = L.tileLayer("https://api.os.uk/maps/raster/v1/zxy/Light_3857/{z}/{x}/{y}.png?key=${apiKey}", {
+	const basemap = L.tileLayer(url, {
+        maxZoom: 20
+    }).addTo(map);
+
+	//const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	//	maxZoom: 19,
+	//	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	//}).addTo(map);
+
+	const marker = L.marker([56.11, -3.93]).addTo(map)
+		.bindPopup("<b>River Forth</b><p><img width=300px height=225px src='River_Forth_near_Stirling.jpg'></p><p>The River Forth is a major river in central Scotland, 47 km (29 mi) long, which drains into the North Sea on the east coast of the country. Its drainage basin covers much of Stirlingshire in Scotland's Central Belt. The Gaelic name for the upper reach of the river, above Stirling, is Abhainn Dubh, meaning 'black river'. The name for the river below the tidal reach (just past where it is crossed by the M9 motorway) is Uisge For.</p><a href='https://en.wikipedia.org/wiki/River_Forth'>Wikipedia</a>", {offset: [200, 150]});
+
+L.control.scale({position:'bottomleft'}).addTo(map);
+
+</script>
+
+</body>
+</html>
