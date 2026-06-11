@@ -191,8 +191,8 @@
     //    geojsonLayer.addTo(map);
     //});
 
-    var geojsonLayer = L.GeoJSON("rivers_ll.geojson");
-    geojsonLayer.addTo(map); 
+    var geojsonLayer = L.geoJSON("rivers_ll.geojson").addTo(map);
+    //geojsonLayer.addTo(map); 
 
     function style(feature) {
         return {
