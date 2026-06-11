@@ -194,13 +194,13 @@
     //var shpfile = new L.Shapefile('rivers.zip'); 
     //shpfile.addTo(map);
 
-    var geojsonLayer = new L.GeoJSON.AJAX("rivers.geojson");       
+    //var geojsonLayer = new L.GeoJSON.AJAX("rivers.geojson");       
     //geojsonLayer.addTo(map);
     //geojsonLayer.on('data:loaded', function(){
     //  geojsonLayer.addTo(map);
     //});
 
-    //var geojsonLayer = new L.GeoJSON.AJAX("test1.geojson");
+    var geojsonLayer = new L.GeoJSON.AJAX("test3.geojson");
     //geojsonLayer.addTo(map);
     geojsonLayer.on('data:loaded', function(){
       geojsonLayer.addTo(map);
