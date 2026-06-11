@@ -19,6 +19,7 @@
     <!--Add the Leaflet libraries-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
     <!--Custom CSS-->
     <link rel="stylesheet" href="rivers_wc1.css" type="text/css">
@@ -28,8 +29,8 @@
     <script src="d3.layout.cloud.js"></script>
 
     <!--Shapefile JS-->
-    <script src="leaflet.shpfile.js"></script>
-    <script src="shp.js"></script>
+    <!--<script src="leaflet.shpfile.js"></script>
+    <script src="shp.js"></script>-->
 
 	<div>
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #1799cb;"> <!-- Dark Blue Background -->
@@ -190,8 +191,11 @@
 
     L.control.scale({position:'bottomleft'}).addTo(map);
 
-    var shpfile = new L.Shapefile('rivers.zip'); 
-    shpfile.addTo(map);
+    //var shpfile = new L.Shapefile('rivers.zip'); 
+    //shpfile.addTo(map);
+
+    var geojsonLayer = new L.GeoJSON.AJAX("rivers.geojson");       
+    geojsonLayer.addTo(map);
 
     </script>
 
