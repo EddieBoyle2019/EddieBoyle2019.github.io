@@ -195,7 +195,10 @@
     //shpfile.addTo(map);
 
     var geojsonLayer = new L.GeoJSON.AJAX("rivers.geojson");       
-    geojsonLayer.addTo(map);
+    //geojsonLayer.addTo(map);
+    geojsonLayer.on('data:loaded', function(){
+        geojsonLayer.addTo(map);
+    });
 
     </script>
 
