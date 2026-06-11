@@ -199,10 +199,17 @@
     L.geoJSON(riversGeoJSONData).addTo(map);
     //geojsonLayer.addTo(map); 
 
+    //function style(feature) {
+    //    return {
+    //        color: "#ff00ff"
+    //    };
+    //}
+
     function style(feature) {
-        return {
-            color: "#ff00ff"
-        };
+        switch (feature.properties.mr) {
+            case '12': return {color: "#ff0000"};
+            case '13': return {color: "#ff00ff"};
+        }
     }
 
     L.geoJSON(riversGeoJSONData, {style: style}).addTo(map);
