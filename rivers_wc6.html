@@ -186,10 +186,13 @@
 
     L.control.scale({position:'bottomleft'}).addTo(map);
 
-    var geojsonLayer = new L.GeoJSON.AJAX("rivers_ll.geojson");       
-        geojsonLayer.on('data:loaded', function(){
-        geojsonLayer.addTo(map);
-    });
+    //var geojsonLayer = new L.GeoJSON.AJAX("rivers_ll.geojson");       
+    //    geojsonLayer.on('data:loaded', function(){
+    //    geojsonLayer.addTo(map);
+    //});
+
+    var geojsonLayer = L.GeoJSON("rivers_ll.geojson");
+    geojsonLayer.addTo(map); 
 
     function style(feature) {
         return {
@@ -197,7 +200,7 @@
         };
     }
 
-    L.geoJson(geojsonLayer, {style: style}).addTo(map);
+    L.GeoJson(geojsonLayer, {style: style}).addTo(map);
 
     //var geojsonLayer = L.GeoJSON("rivers_ll.geojson", {
         //style: function(feature) {
