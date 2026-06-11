@@ -191,7 +191,7 @@
         geojsonLayer.addTo(map);
     });
 
-    L.geoJSON(geojsonLayer, {
+    L.GeoJSON(geojsonLayer, {
         style: function(feature) {
             switch (feature.properties.mr) {
                 case '12': return {color: "#ff0000"};
