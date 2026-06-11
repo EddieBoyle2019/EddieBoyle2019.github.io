@@ -186,16 +186,16 @@
 
     L.control.scale({position:'bottomleft'}).addTo(map);
 
-    var geojsonLayer = new L.GeoJSON.AJAX("rivers_ll.geojson");       
-        geojsonLayer.on('data:loaded', function(){
-        geojsonLayer.addTo(map);
-    });
+    //var geojsonLayer = new L.GeoJSON.AJAX("rivers_ll.geojson");       
+    //    geojsonLayer.on('data:loaded', function(){
+    //    geojsonLayer.addTo(map);
+    //});
 
-    L.GeoJSON(geojsonLayer, {
+    var geojsonLayer = L.GeoJSON("rivers_ll.geojson" {
         style: function(feature) {
             switch (feature.properties.mr) {
                 case '12': return {color: "#ff0000"};
-                case '13':   return {color: "#0000ff"};
+                case '13': return {color: "#0000ff"};
             }
         }
     }).addTo(map);
