@@ -220,6 +220,10 @@
 
     L.geoJSON(riversGeoJSONData, {style: style}).addTo(map);
 
+    L.geoJSON(riversGeoJSONData).eachLayer(function (layer) {
+        console.log(layer.feature.properties.mrl)
+    });
+
     </script>
 
 </body>
