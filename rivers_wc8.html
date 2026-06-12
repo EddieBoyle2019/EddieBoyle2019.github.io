@@ -227,9 +227,11 @@
         //catchmentNames.add(layer.feature.properties.mrl)
         catNamesArr.push(layer.feature.properties.mrl);
     });
+    //Get unique values from data
     let uniqueCatNamesSet = new Set(catNamesArr);
     let uniqueCatNames = [...uniqueCatNamesSet];
     //remove null values
+    let uniqueCatNamesFiltered = [];
     var uniqueCatNamesFiltered = array.filter(function (el) {
         return el != null;
     });
