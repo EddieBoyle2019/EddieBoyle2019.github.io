@@ -185,8 +185,8 @@
 
     L.control.scale({position:'bottomleft'}).addTo(map);
 
+    //Load rivers data and display on map
     L.geoJSON(riversGeoJSONData).addTo(map);
-
     function style(feature) {
         switch (feature.properties.mr) {
             case 1: 
@@ -217,21 +217,23 @@
                 return {color: "#FF004A"};
         }
     }
-
     L.geoJSON(riversGeoJSONData, {style: style}).addTo(map);
 
+    //read catchment names from data
     //Let catchmentNames = new Set();
     let catNamesArr = [];
-
     L.geoJSON(riversGeoJSONData).eachLayer(function (layer) {
         //console.log(layer.feature.properties.mrl)
         //catchmentNames.add(layer.feature.properties.mrl)
         catNamesArr.push(layer.feature.properties.mrl);
     });
-
     let uniqueCatNamesSet = new Set(catNamesArr);
     let uniqueCatNames = [...uniqueCatNamesSet];
-    console.log(uniqueCatNames);
+    //remove null values
+    var uniqueCatNamesFiltered = array.filter(function (el) {
+        return el != null;
+    });
+    console.log(uniqueCatNamesFiltered);
 
     </script>
 
