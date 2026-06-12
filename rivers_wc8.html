@@ -220,9 +220,18 @@
 
     L.geoJSON(riversGeoJSONData, {style: style}).addTo(map);
 
+    //Let catchmentNames = new Set();
+    let catNamesArr = [];
+
     L.geoJSON(riversGeoJSONData).eachLayer(function (layer) {
-        console.log(layer.feature.properties.mrl)
+        //console.log(layer.feature.properties.mrl)
+        //catchmentNames.add(layer.feature.properties.mrl)
+        catNamesArr.push(layer.feature.properties.mrl);
     });
+
+    let uniqueCatNamesSet = new Set(catNamesArr);
+    let uniqueCatNames = [...uniqueCatNamesSet];
+    console.log(uniqueCatNames);
 
     </script>
 
