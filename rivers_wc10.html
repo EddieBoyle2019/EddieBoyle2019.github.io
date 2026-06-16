@@ -265,7 +265,7 @@ d3.select("#wordcloudDiv").select("svg").remove();
         .size([400, 400])
         //.words(riversCloudArray.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
         //.words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: 10 + Math.random() * 50}; }))
-        words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: d.substring(d.indexOf("=") +1 )}; }))
+        .words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: d.substring(d.indexOf("=") +1 )}; }))
         .padding(5)
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })
