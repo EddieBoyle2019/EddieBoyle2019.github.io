@@ -248,7 +248,7 @@ function drawUpdate(words){
 */
 
 function drawUpdate(newWords){
-    //alert("Feature clicked: " + newWords);
+    alert("Feature clicked: " + newWords);
 
 //Remove old words
 d3.select("#wordcloudDiv")
@@ -267,7 +267,7 @@ d3.select("#wordcloudDiv").select("svg").remove();
     const riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
 
 
-    alert("Min: " + riversCloudArrayMin + "; Max: " + riversCloudArrayMax);
+    //alert("Min: " + riversCloudArrayMin + "; Max: " + riversCloudArrayMax);
 
     //function normNum(numValue)
     //{
