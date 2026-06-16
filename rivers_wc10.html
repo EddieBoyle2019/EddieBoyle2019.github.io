@@ -262,7 +262,7 @@ d3.select("#wordcloudDiv").select("svg").remove();
 
     let riversCloudArray = newWords.split(";");
     //get min and max values
-    let riversCloudArrayNumbers = riversCloudArray.map(function(num) { return substring(num.indexOf("=") + 1 });
+    let riversCloudArrayNumbers = riversCloudArray.map(function(num) { return substring(num.indexOf("=") + 1 )});
     let riversCloudArrayMax = Math.max.apply(Math, riversCloudArrayNumbers);
     let riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
 
