@@ -273,17 +273,16 @@ d3.select("#wordcloudDiv").select("svg").remove();
     {
         if (riversCloudArrayMax == riversCloudArrayMin)
         {
-            const normNumValue = 1;
+            let normNumValue = 1;
             //let normNumValue = 0 +  ((numValue - riversCloudArrayMin) * (1-0)) / (riversCloudArrayMax - riversCloudArrayMin);
                         alert(normNumValue);
         }
         else
         {
             //let normNumValue = 1;
-            const normNumValue = 0 +  ((numValue - riversCloudArrayMin) * (1-0)) / (riversCloudArrayMax - riversCloudArrayMin);
+            let normNumValue = 0 +  ((numValue - riversCloudArrayMin) * (1-0)) / (riversCloudArrayMax - riversCloudArrayMin);
                         alert(normNumValue);
         }
-
 
         return normNumValue;
     } 
