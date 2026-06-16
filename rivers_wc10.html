@@ -150,8 +150,14 @@
         //pointToLayer: function (feature, latlng) {
         //returnreturn L.circleMarker(latlng, geojsonMarkerOptions);
         //}, 
-        onEachFeature: onEachFeature
+        //onEachFeature: onEachFeature
+        onEachFeature: function (feature, layer) {
+            layer.on('click', function (e) {
+                alert("Feature clicked: " + feature.properties.rivers);
+            });
+        }
     }).addTo(map);
+
 
     //L.geoJSON(riversHexGeoJSONData).addTo(map);
 
