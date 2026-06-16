@@ -247,8 +247,15 @@ function drawUpdate(words){
     }
 */
 
-function drawUpdate(words){
-    alert("Feature clicked: " + words);
+function drawUpdate(newWords){
+    //alert("Feature clicked: " + words);
+
+d3.select("#wordcloudDiv")
+  .selectAll("text")
+  .data([]) // Pass an empty array to bind no data
+  .exit()
+  .remove(); // Removes all existing text elements
+
     let riversCloudArray = words.split(";");
         var layout = d3.layout.cloud()
         .size([400, 400])
