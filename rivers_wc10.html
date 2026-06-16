@@ -136,7 +136,24 @@
     L.geoJSON(riversGeoJSONData, {style: style}).addTo(map);
     */
 
-    L.geoJSON(riversHexGeoJSONData).addTo(map);
+    function onEachFeature(feature, layer) {
+        // does this feature have a property named popupContent?
+        //if (feature.properties && feature.properties.Name && feature.properties.Lat && feature.properties.Lon) {
+        //layer.bindPopup(feature.properties.Name+"("+feature.properties.Lat+","+feature.properties.Lon+")",);
+        //}
+        if (feature.properties && feature.properties.rivers) {
+            layer.bindPopup(feature.properties.rivers);
+        }
+    }
+
+    L.geoJSON(riversHexGeoJSONData, {
+        //pointToLayer: function (feature, latlng) {
+        //returnreturn L.circleMarker(latlng, geojsonMarkerOptions);
+        //}, 
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
+    //L.geoJSON(riversHexGeoJSONData).addTo(map);
 
     //read catchment names from data
     let catNamesArr = [];
