@@ -140,7 +140,8 @@
 
     //read catchment names from data
     let catNamesArr = [];
-    L.geoJSON(riversGeoJSONData).eachLayer(function (layer) {
+    //L.geoJSON(riversGeoJSONData).eachLayer(function (layer) {
+    L.geoJSON(riversHexGeoJSONData).eachLayer(function (layer) {
         //console.log(layer.feature.properties.mrl)
         //catchmentNames.add(layer.feature.properties.mrl)
         //catNamesArr.push(layer.feature.properties.mrl);
