@@ -181,9 +181,10 @@
 
 function drawUpdate(words){
     d3.layout.cloud().size([400, 400])
-            .words(words)
+            //.words(words)
+            .words(words.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
             .padding(5)
-            .rotate(function() { return ~~(Math.random() * 2) * 90; })
+            .rotate(function() { return 0; })
             .font("Impact")
             .fontSize(function(d) { return d.size; })
             .start();
