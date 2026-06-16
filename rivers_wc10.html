@@ -268,13 +268,14 @@ d3.select("#wordcloudDiv").select("svg").remove();
 
     function normNum(numValue)
     {
-        let normNumValue = 0 +  ((numValue - riversCloudArrayMin) * (1-0)) / (riversCloudArrayMax - riversCloudArrayMin)
+        let normNumValue = 0 +  ((numValue - riversCloudArrayMin) * (1-0)) / (riversCloudArrayMax - riversCloudArrayMin);
+        alert(normNumValue);
         return normNumValue;
     } 
 
 //normalized_value = range_min + ((value - original_min) * (range_max - range_min)) / (original_max - original_min)
 
-    alert("Max: " + riversCloudArrayMax + "; Min: " + riversCloudArrayMin);
+    //alert("Max: " + riversCloudArrayMax + "; Min: " + riversCloudArrayMin);
 
         var layout = d3.layout.cloud()
         .size([400, 400])
