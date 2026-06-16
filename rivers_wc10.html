@@ -292,7 +292,7 @@ d3.select("#wordcloudDiv").select("svg").remove();
 // 2. Define a scale to map weights to font sizes
 const fontSizeScale = d3.scale.linear()
   .domain([riversCloudArrayMin, riversCloudArrayMax])
-  .range([10, 80]); // Minimum and maximum font sizes in pixels
+  .range([10, 60]); // Minimum and maximum font sizes in pixels
 
         var layout = d3.layout.cloud()
         .size([400, 400])
