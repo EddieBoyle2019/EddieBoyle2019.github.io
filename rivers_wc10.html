@@ -249,9 +249,10 @@ function drawUpdate(words){
 
 function drawUpdate(words){
     alert("Feature clicked: " + words);
+    let riversCloudArray = words.split(";");
         var layout = d3.layout.cloud()
         .size([400, 400])
-        .words(words.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
+        .words(riversCloudArray.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
         .padding(5)
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })
