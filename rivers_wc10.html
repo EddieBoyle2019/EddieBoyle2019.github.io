@@ -248,7 +248,7 @@ function drawUpdate(words){
 */
 
 function drawUpdate(newWords){
-    alert("Feature clicked: " + newWords);
+    //alert("Feature clicked: " + newWords);
 
 //Remove old words
 d3.select("#wordcloudDiv")
@@ -261,11 +261,18 @@ d3.select("#wordcloudDiv")
 d3.select("#wordcloudDiv").select("svg").remove();
 
     let riversCloudArray = newWords.split(";");
+    //get min and max values
+    let riversCloudArrayNumbers = riversCloudArray.map(function(num) { return substring(num.indexOf("=") + 1 });
+    let riversCloudArrayMax = Math.max.apply(Math, riversCloudArrayNumbers);
+    let riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
+
+    alert("Max: " + riversCloudArrayMax + "; Max: " + riversCloudArrayMin);
+
         var layout = d3.layout.cloud()
         .size([400, 400])
         //.words(riversCloudArray.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
         //.words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: 10 + Math.random() * 50}; }))
-        .words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: d.substring(d.indexOf("=") +1 )}; }))
+        .words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: d.substring(d.indexOf("=") + 1 )}; }))
         .padding(5)
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })
