@@ -256,6 +256,8 @@ d3.select("#wordcloudDiv")
   .exit()
   .remove(); // Removes all existing text elements
 
+d3.select("#wordcloudDiv").remove("svg")
+
     let riversCloudArray = newWords.split(";");
         var layout = d3.layout.cloud()
         .size([400, 400])
