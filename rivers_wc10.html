@@ -256,7 +256,7 @@ d3.select("#wordcloudDiv")
   .exit()
   .remove(); // Removes all existing text elements
 
-    let riversCloudArray = words.split(";");
+    let riversCloudArray = newWords.split(";");
         var layout = d3.layout.cloud()
         .size([400, 400])
         .words(riversCloudArray.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
