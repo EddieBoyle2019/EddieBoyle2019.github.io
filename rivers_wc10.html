@@ -194,7 +194,7 @@ function drawUpdate(words){
     var words = d3.select("#wordcloudDiv").append("svg")
             .selectAll("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-            .attr("transform", "translate(200,200)");
+            .attr("transform", "translate(200,200)")
             .selectAll("text")
             .data(words);
 
