@@ -9,8 +9,8 @@ html, body, #map {
 
 #wordcloudDiv {
     z-index: 1001;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     top: 200px; 
     left: 30px;
     position:absolute;
