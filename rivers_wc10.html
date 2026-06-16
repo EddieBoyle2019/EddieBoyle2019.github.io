@@ -263,24 +263,25 @@ d3.select("#wordcloudDiv").select("svg").remove();
     let riversCloudArray = newWords.split(";");
     //get min and max values
     let riversCloudArrayNumbers = riversCloudArray.map(function(num) { return num.substring(num.indexOf("=") + 1 )});
-    let riversCloudArrayMax = Math.max.apply(Math, riversCloudArrayNumbers);
-    let riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
+    const riversCloudArrayMax = Math.max.apply(Math, riversCloudArrayNumbers);
+    const riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
 
 
     alert("Min: " + riversCloudArrayMin + "; Max: " + riversCloudArrayMax);
 
     function normNum(numValue)
     {
-        //if (riversCloudArrayMax != riversCloudArrayMin)
-        //{
+        if (riversCloudArrayMax != riversCloudArrayMin)
+        {
             let normNumValue = 0 +  ((numValue - riversCloudArrayMin) * (1-0)) / (riversCloudArrayMax - riversCloudArrayMin);
-            alert(normNumValue);
-        //}
-        //else
-        // {
-        //    let normNumValue = 1;
-        //}
 
+        }
+        else
+        {
+            let normNumValue = 1;
+        }
+
+            alert(normNumValue);
         return normNumValue;
     } 
 
