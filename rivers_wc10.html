@@ -82,7 +82,7 @@
     const mapOptions = {
         minZoom: 7,
         maxZoom: 20,
-        center: [ 56.0, -3.72 ],
+        center: [ 56.1, -3.8 ],
         zoom: 9,
         maxBounds: [
             [ 49.528423, -10.76418 ],
@@ -250,6 +250,7 @@ function drawUpdate(words){
 function drawUpdate(newWords){
     //alert("Feature clicked: " + words);
 
+//Remove old words
 d3.select("#wordcloudDiv")
   .selectAll("text")
   .data([]) // Pass an empty array to bind no data
@@ -262,7 +263,8 @@ d3.select("#wordcloudDiv").select("svg").remove();
     let riversCloudArray = newWords.split(";");
         var layout = d3.layout.cloud()
         .size([400, 400])
-        .words(riversCloudArray.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
+        //.words(riversCloudArray.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
+        .words(riversCloudArray.map(function(d) { return {text: d.substring(0, d.indexOf("=")), size: 10 + Math.random() * 50}; }))
         .padding(5)
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })
