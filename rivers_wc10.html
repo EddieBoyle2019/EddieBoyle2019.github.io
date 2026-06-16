@@ -153,7 +153,8 @@
         //onEachFeature: onEachFeature
         onEachFeature: function (feature, layer) {
             layer.on('click', function (e) {
-                alert("Feature clicked: " + feature.properties.rivers);
+                //alert("Feature clicked: " + feature.properties.rivers);
+                drawUpdate(feature.properties.rivers);
             });
         }
     }).addTo(map);
@@ -178,7 +179,45 @@
         return el != null;
     });
 
+function drawUpdate(words){
+    d3.layout.cloud().size([400, 400])
+            .words(words)
+            .padding(5)
+            .rotate(function() { return ~~(Math.random() * 2) * 90; })
+            .font("Impact")
+            .fontSize(function(d) { return d.size; })
+            .start();
+
+    // new variable to hold the selection
+    //var words = area1.select("#svg2")
+    //var words = area1.select("#svg2")
+    var words = d3.select("#wordcloudDiv").append("svg")
+            .selectAll("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("transform", "translate(200,200)");
+            .selectAll("text")
+            .data(words);
+
+    // append new text elements
+    words.enter().append("text");
+
+    // update all words in the word cloud (when you append 
+    // nodes from the "enter" selection, d3 will add the new 
+    // nodes to the "update" selection, thus all of them will
+    // be updated here.
+    words.style("font-size", function(d) { return d.size + "px"; })
+         .style("font-family", "Impact")
+         .style("fill", function(d, i) { return fill(i); })
+         .attr("transform", function(d) {
+             return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+         })
+         .text(function(d) { return d.text; });
+
+    words.exit().remove(); // new line to remove all unused words
+}
+
     //D3 wordcloud
+/*
     var layout = d3.layout.cloud()
         .size([400, 400])
         .words(uniqueCatNamesFiltered.map(function(d) { return {text: d, size: 10 + Math.random() * 50}; }))
@@ -203,7 +242,7 @@
         .attr("transform", function(d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
         .text(function(d) { return d.text; });
     }
-
+*/
     </script>
 
 </body>
