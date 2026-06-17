@@ -1,0 +1,51 @@
+
+html,body{
+height:100%;
+margin:0;
+background:#f5f7fa;
+}
+
+#map{
+height:70vh;
+min-height:500px;
+width:100%;
+}
+
+#wordcloudDiv{
+width:100%;
+min-height:400px;
+overflow:hidden;
+}
+
+.card{
+border:none;
+border-radius:12px;
+}
+
+.navbar-brand img{
+background:#fff;
+padding:4px;
+border-radius:6px;
+}
+
+@media (max-width:991px){
+#map{
+height:60vh;
+min-height:400px;
+}
+
+#wordcloudDiv{
+min-height:300px;
+}
+}
+
+@media (max-width:576px){
+#map{
+height:50vh;
+min-height:300px;
+}
+
+.navbar-brand span{
+font-size:.95rem;
+}
+}
