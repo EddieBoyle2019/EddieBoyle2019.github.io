@@ -40,7 +40,7 @@
     
     <div class="col-lg-4">
       <div class="card shadow-sm h-100">
-        <div class="card-header fw-bold">River Word Cloud</div>
+        <!--<div class="card-header fw-bold">River Word Cloud</div>-->
         <div class="card-body">
           <div id="wordcloudDiv"></div>
         </div>
@@ -49,7 +49,7 @@
 
     <div class="col-lg-8">
       <div class="card shadow-sm">
-        <div class="card-header fw-bold">Map</div>
+        <!--<div class="card-header fw-bold">Map</div>-->
         <div class="card-body p-0">
           <div id="map"></div>
         </div>
@@ -83,7 +83,7 @@ function drawUpdate(newWords){
  let min=Math.min.apply(Math,nums);
 
  let w=document.getElementById("wordcloudDiv").clientWidth;
- let h=400;
+ let h=300;
 
  let scale=d3.scale.linear().domain([min,max]).range([16,56]);
 
