@@ -107,6 +107,7 @@
     // add catchment hexagon river data and add click/mouseover function to update wordcloud
     L.geoJSON(riversHexGeoJSONData, {
         opacity: 0,
+        fill-opacity: 0,
         onEachFeature: function (feature, layer) {
             layer.on('mouseover', function (e) {
             //layer.on('click', function (e) {
