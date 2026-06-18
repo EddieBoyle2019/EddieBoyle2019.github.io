@@ -144,7 +144,7 @@
         const fontSizeScale = d3.scale.linear()
             .domain([riversCloudArrayMin, riversCloudArrayMax])
             //.range([15, 40]); // Minimum and maximum font sizes in pixels
-            .range([(riversCloudArrayMin != riversCloudArrayMax ? 15 : 40), 40]); // Minimum and maximum font sizes in pixels, if one river use only highest value
+            .range([(riversCloudArrayMin != riversCloudArrayMax ? 10 : 35), 35]); // Minimum and maximum font sizes in pixels, if one river use only highest value
 
         // build wordcloud
         var layout = d3.layout.cloud()
