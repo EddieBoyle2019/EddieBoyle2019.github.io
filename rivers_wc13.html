@@ -151,7 +151,7 @@
         var layout = d3.layout.cloud()
         .size([
             Math.min(500, document.getElementById("wordcloudDiv").clientWidth - 20),
-            window.innerWidth < 1000 ? 180 : 400
+            window.innerWidth < 1000 ? 180 : 300
         ])
         .words(riversCloudArray.map(d => ({ text: d.substring(0, d.indexOf("=")), size: fontSizeScale(d.substring(d.indexOf("=") + 1 )) })))
         .padding(5)
