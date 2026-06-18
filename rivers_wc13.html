@@ -100,6 +100,9 @@
 
     L.control.scale({position:'bottomleft'}).addTo(map);
     
+    //Load ORN rivers data and display on map
+    L.geoJSON(riversGeoJSONData).addTo(map);
+
     // add catchment hexagon river data and add click/mouseover function to update wordcloud
     L.geoJSON(riversHexGeoJSONData, {
         onEachFeature: function (feature, layer) {
