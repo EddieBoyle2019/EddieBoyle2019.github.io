@@ -103,6 +103,7 @@ html, body, #map {
 
 @media (max-width: 768px) {
     #wordcloudDiv {
+        width: min(500px, calc(100vw - 20px));
         top: 100px;
         left: 10px;
         right: 10px;
@@ -135,6 +136,7 @@ html, body, #map {
 
 @media (max-width: 480px) {
     #wordcloudDiv {
+        width: min(500px, calc(100vw - 20px));
         top: 100px;
         left: 5px;
         right: 5px;
