@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>F2O rivers and word cloud</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <!--Bootstrap-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <!--Ordnance Survey Styling-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OrdnanceSurvey/os-api-branding@0.3.1/os-api-branding.css" />
+
+    <!--Leaflet libraries-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!--Rivers data (GeoJSON)-->
+    <script type="text/javascript" src="rivers_hex_ll.js"></script>
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="rivers_wc13_responsive.css" type="text/css">
+
+    <!--D3 and Wordcloud JS-->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.layout.cloud.js"></script>
+
+    <!--Bootstrap responsive navbar-->
+	<div>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #1799cb;"> <!-- Dark Blue Background -->
+            <div class="container-fluid text-wrap">
+                <a class="navbar-brand">
+                    <img src="logo.png" alt="F2O" class="logo" style="height: 60px">
+                </a> 
+                <div id="title">F2O rivers and word cloud</div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Explore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Insights</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</head>
+
+<body>
+
+    <div id="wordcloudDiv">
+    </div>
+
+    <div id="map" class="map">
+    </div>
+
+    <!--OS attribute logo-->
+    <script src="https://cdn.jsdelivr.net/gh/OrdnanceSurvey/os-api-branding@0.3.1/os-api-branding.js"></script>
+
+    <script>
+
+    // Leaflet
+
+	// OS Data Hub API Key
+	const apiKey = 'hY9nIzYSGV9A9kaF8ScWbl7wghXs6P6j';
+
+    // initialize the map.
+    const mapOptions = {
+        minZoom: 7,
+        maxZoom: 20,
+        center: [ 56.2, -3.7 ],
+        zoom: 8,
+        maxBounds: [
+            [ 49.528423, -10.76418 ],
+            [ 61.331151, 1.9134116 ]
+        ],
+    };
+
+	const map = L.map('map', mapOptions);
+
+	// load and display OS ZXY tile layer on the map
+	url = "https://api.os.uk/maps/raster/v1/zxy/Light_3857/{z}/{x}/{y}.png?key=" + apiKey;
+	const basemap = L.tileLayer(url, {
+        maxZoom: 20
+    }).addTo(map);
+
+    L.control.scale({position:'bottomleft'}).addTo(map);
+    
+    // add catchment hexagon river data and add click/mouseover function to update wordcloud
+    L.geoJSON(riversHexGeoJSONData, {
+        onEachFeature: function (feature, layer) {
+            layer.on('mouseover', function (e) {
+            //layer.on('click', function (e) {
+                drawUpdate(feature.properties.rivers);
+            });
+        }
+    }).addTo(map);
+
+    // read catchment names from data
+    let catNamesArr = [];
+    L.geoJSON(riversHexGeoJSONData).eachLayer(function (layer) {
+        catNamesArr.push(layer.feature.properties.rivers);
+    });
+    // get unique values from data
+    let uniqueCatNamesSet = new Set(catNamesArr);
+    let uniqueCatNames = [...uniqueCatNamesSet];
+    //remove null values
+    let uniqueCatNamesFiltered = uniqueCatNames.filter(function (el) {
+        return el != null;
+    });
+
+    // function to create and update D3 wordcloud
+    function drawUpdate(newWords){
+        // remove old words
+        d3.select("#wordcloudDiv")
+            .selectAll("text")
+            .data([]) // Pass an empty array to bind no data
+            .exit()
+            .remove(); // Removes all existing text elements
+        d3.select("#wordcloudDiv").select("svg").remove();
+
+        // split data value string into array with delimiter
+        let riversCloudArray = newWords.split(";");
+        // get min and max values
+        let riversCloudArrayNumbers = riversCloudArray.map(function(num) { return num.substring(num.indexOf("=") + 1 )});
+        const riversCloudArrayMax = Math.max.apply(Math, riversCloudArrayNumbers);
+        const riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
+
+        // define a scale to map weights to font sizes
+        const fontSizeScale = d3.scale.linear()
+            .domain([riversCloudArrayMin, riversCloudArrayMax])
+            //.range([15, 40]); // Minimum and maximum font sizes in pixels
+            .range([(riversCloudArrayMin != riversCloudArrayMax ? 10 : 35), 35]); // Minimum and maximum font sizes in pixels, if one river use only highest value
+            //.range([((riversCloudArrayMin != riversCloudArrayMax) && (window.innerWidth) < 1000 ? 10 : 35), (window.innerWidth < 1000 ? 35 : 45)]); // Minimum and maximum font sizes in pixels, if one river use only highest value, if browser width > 1000 increase and shift range
+
+        // build wordcloud
+        var layout = d3.layout.cloud()
+        .size([
+            Math.min(500, document.getElementById("wordcloudDiv").clientWidth - 20),
+            window.innerWidth < 1000 ? 180 : 400
+        ])
+        .words(riversCloudArray.map(d => ({ text: d.substring(0, d.indexOf("=")), size: fontSizeScale(d.substring(d.indexOf("=") + 1 )) })))
+        .padding(5)
+        .rotate(function() { return 0; })
+        .fontSize(function(d) { return d.size; })
+        . on("end", draw);
+
+        layout.start();
+
+        function draw(words) {
+            d3.select("#wordcloudDiv").append("svg")
+            .attr("width", "100%")
+            .attr("height", layout.size()[1])
+            .attr("viewBox", `0 0 ${layout.size()[0]} ${layout.size()[1]}`)
+            .append("g")
+            .attr("transform", `translate(${layout.size()[0]/2},${layout.size()[1]/2})`)
+            .selectAll("text")
+            .data(words)
+            .enter().append("text")
+            .style("font-size", function(d) { return d.size + "px"; })
+            .style("fill", "#69b3a2")
+            .attr("text-anchor", "middle")
+            .attr("transform", function(d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
+            .text(function(d) { return d.text; });
+        }
+    }
+
+    </script>
+
+</body>
+</html>
