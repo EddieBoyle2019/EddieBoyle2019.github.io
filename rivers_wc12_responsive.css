@@ -30,6 +30,7 @@ html, body, #map {
     /*display: inline-flex;
     flex-wrap: wrap;
     */
+    width: 150px;
 }
 
 /*Leaflet*/
