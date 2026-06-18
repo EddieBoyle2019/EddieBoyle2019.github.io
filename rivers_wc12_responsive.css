@@ -111,7 +111,7 @@ html, body, #map {
         height: 180px;
         /*min-height: 180px;
         max-height: 35vh;*/
-        padding: 8px;
+        /*padding: 8px;*/
     }
 
     .leaflet-control-zoom {
