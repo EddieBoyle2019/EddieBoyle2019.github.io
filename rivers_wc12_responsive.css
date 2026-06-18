@@ -27,8 +27,9 @@ html, body, #map {
 #title
 {
     color: white;
-    display: inline-flex;
+    /*display: inline-flex;
     flex-wrap: wrap;
+    */
 }
 
 /*Leaflet*/
