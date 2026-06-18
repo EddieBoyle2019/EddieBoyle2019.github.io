@@ -141,15 +141,10 @@
         const riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
 
         // define a scale to map weights to font sizes
-        // if only one river, use highest size
-        if (riversCloudArrayMin != riversCloudArrayMax) {
-            const fontSizeScale = d3.scale.linear()
-                .domain([riversCloudArrayMin, riversCloudArrayMax])
-                .range([15, 40]); // Minimum and maximum font sizes in pixels
-        }
-        else {
-            const fontSizeScale = 40;   
-        }
+        const fontSizeScale = d3.scale.linear()
+            .domain([riversCloudArrayMin, riversCloudArrayMax])
+            //.range([15, 40]); // Minimum and maximum font sizes in pixels
+            .range([(riversCloudArrayMin != riversCloudArrayMax ? 15 : 40), 40]); // Minimum and maximum font sizes in pixels, if one river use only highest value
 
         // build wordcloud
         var layout = d3.layout.cloud()
