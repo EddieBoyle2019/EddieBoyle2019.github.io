@@ -82,8 +82,8 @@
     const mapOptions = {
         minZoom: 7,
         maxZoom: 20,
-        center: [ 56.1, -3.8 ],
-        zoom: 9,
+        center: [ 56.2, -3.7 ],
+        zoom: 8,
         maxBounds: [
             [ 49.528423, -10.76418 ],
             [ 61.331151, 1.9134116 ]
@@ -141,9 +141,15 @@
         const riversCloudArrayMin = Math.min.apply(Math, riversCloudArrayNumbers);
 
         // define a scale to map weights to font sizes
-        const fontSizeScale = d3.scale.linear()
-            .domain([riversCloudArrayMin, riversCloudArrayMax])
-            .range([15, 40]); // Minimum and maximum font sizes in pixels
+        // if only one river, use highest size
+        if (riversCloudArrayMin != riversCloudArrayMax) {
+            const fontSizeScale = d3.scale.linear()
+                .domain([riversCloudArrayMin, riversCloudArrayMax])
+                .range([15, 40]); // Minimum and maximum font sizes in pixels
+        }
+        else {
+            const fontSizeScale = 40;   
+        }
 
         // build wordcloud
         var layout = d3.layout.cloud()
