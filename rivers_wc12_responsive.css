@@ -108,7 +108,7 @@ html, body, #map {
     }
 
     .leaflet-control-zoom {
-        top: 300px;
+        top: 280px;
     }
 /*
     .navbar .container-fluid {
@@ -132,10 +132,17 @@ html, body, #map {
         top: 80px;
         left: 5px;
         right: 5px;
-        min-height: 160px;
-        max-height: 30vh;
+        min-height: 180px;
+        max-height: 35vh;
     }
+
+    .leaflet-control-zoom {
+        top: 280px;
+    }
+
 /*
+
+
     .navbar div[style*="color:white"] {
         font-size: 0.8rem;
     }
