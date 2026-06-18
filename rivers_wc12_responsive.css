@@ -83,13 +83,14 @@ html, body, #map {
     overflow: auto;
 }
 
+/*
 @media (max-width: 992px) {
     #wordcloudDiv {
         top: 100px;
         left: 10px;
         right: 10px;
         width: auto;
-    }
+    }*/
 /*
     .navbar-brand img {
         height: 45px !important;
@@ -102,14 +103,15 @@ html, body, #map {
         /*top: 80px;*/
         left: 10px;
         right: 10px;
-        min-height: 180px;
-        max-height: 35vh;
+        height: 180px;
+        /*min-height: 180px;
+        max-height: 35vh;*/
         padding: 8px;
     }
 
     .leaflet-control-zoom {
         position: absolute;
-        top: 280px;
+        top: 300px;
     }
 /*
     .navbar .container-fluid {
@@ -133,13 +135,14 @@ html, body, #map {
         /*top: 80px;*/
         left: 5px;
         right: 5px;
-        min-height: 180px;
-        max-height: 35vh;
+        height: 180px;
+        /*min-height: 180px;
+        max-height: 35vh;*/
     }
 
     .leaflet-control-zoom {
         position: absolute;
-        top: 280px;
+        top: 300px;
     }
 
 /*
