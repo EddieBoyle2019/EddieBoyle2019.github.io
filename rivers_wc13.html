@@ -21,6 +21,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <!--Rivers data (GeoJSON)-->
+    <script type="text/javascript" src="ORN_rivers_ll.js"></script>
     <script type="text/javascript" src="rivers_hex_ll.js"></script>
 
     <!--Custom CSS-->
@@ -101,7 +102,7 @@
     L.control.scale({position:'bottomleft'}).addTo(map);
     
     //Load ORN rivers data and display on map
-    L.geoJSON(riversGeoJSONData).addTo(map);
+    L.geoJSON(ornRiversGeoJSONData).addTo(map);
 
     // add catchment hexagon river data and add click/mouseover function to update wordcloud
     L.geoJSON(riversHexGeoJSONData, {
