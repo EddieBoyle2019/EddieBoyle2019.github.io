@@ -117,15 +117,15 @@
     function style(feature) {
         switch (feature.properties.strahler) {
             case 1: 
-                return {weight: 0.2};
+                return {weight: 1; color: "#FF0000"};
             case 2: 
-                return {weight: 0.6};
+                return {weight: 2};
             case 3: 
-                return {weight: 1.0};
+                return {weight: 3};
             case 4: 
-                return {weight: 2.5};
-            case 5: 
                 return {weight: 4};
+            case 5: 
+                return {weight: 5};
             case 6: 
                 return {weight: 6};
         }
