@@ -108,7 +108,7 @@
     L.geoJSON(aoiGeoJSONData, {
         weight: 1,
         //color: '#858585',
-        color: '#B0B0B02',
+        color: '#DBDBDB',
         fillOpacity: 0.1,
     }).addTo(map);
 
@@ -117,13 +117,17 @@
     function style(feature) {
         switch (feature.properties.strahler) {
             case 1: 
-                return {weight: 1};
+                return {weight: 0.5};
             case 2: 
-                return {weight: 2};
+                return {weight: 1};
             case 3: 
-                return {weight: 3};
+                return {weight: 2};
             case 4: 
+                return {weight: 3};
+            case 5: 
                 return {weight: 4};
+            case 6: 
+                return {weight: 5};
         }
     }
     L.geoJSON(ornRiversGeoJSONData, {style: style}).addTo(map);
