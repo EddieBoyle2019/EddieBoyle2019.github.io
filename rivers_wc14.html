@@ -113,21 +113,23 @@
     }).addTo(map);
 
     //Load ORN rivers data and display on map
-    L.geoJSON(ornRiversGeoJSONData).addTo(map);
+    L.geoJSON(ornRiversGeoJSONData, {
+        color: '#A3C1E0'
+    }).addTo(map);
     function style(feature) {
         switch (feature.properties.strahler) {
             case 1: 
-                return {weight: 1, color: "#FF0000"};
+                return {weight: 1, color: "#A3C1E0"};
             case 2: 
-                return {weight: 2};
+                return {weight: 2, color: "#7FB3D6"};
             case 3: 
-                return {weight: 3};
+                return {weight: 3, color: "#5DA5D0"};
             case 4: 
-                return {weight: 4};
+                return {weight: 4, color: "#3B8FC2"};
             case 5: 
-                return {weight: 5};
+                return {weight: 5, color: "#1E7EB4"};
             case 6: 
-                return {weight: 6};
+                return {weight: 6, color: "#005B88"};
         }
     }
     L.geoJSON(ornRiversGeoJSONData, {style: style}).addTo(map);
