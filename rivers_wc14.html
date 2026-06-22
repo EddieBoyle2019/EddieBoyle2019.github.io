@@ -106,7 +106,7 @@
     
     //Load AOI data and display on map
     L.geoJSON(aoiGeoJSONData, {
-        //weight: 0.5,
+        weight: 0.5,
         //color: '#858585',
         color: '#DBDBDB',
         fillOpacity: 0.1,
@@ -114,6 +114,7 @@
 
     //Load ORN rivers data and display on map
     L.geoJSON(ornRiversGeoJSONData, {
+        weight: 0.5,
         color: '#A3C1E0'
     }).addTo(map);
     function style(feature) {
