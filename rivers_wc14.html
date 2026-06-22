@@ -107,12 +107,26 @@
     //Load AOI data and display on map
     L.geoJSON(aoiGeoJSONData, {
         weight: 1,
-        color: '#858585',
+        //color: '#858585',
+        color: '#B0B0B02',
         fillOpacity: 0.1,
     }).addTo(map);
 
     //Load ORN rivers data and display on map
     L.geoJSON(ornRiversGeoJSONData).addTo(map);
+    function style(feature) {
+        switch (feature.properties.strahler) {
+            case 1: 
+                return {weight: 1};
+            case 2: 
+                return {weight: 2};
+            case 3: 
+                return {weight: 3};
+            case 4: 
+                return {weight: 4};
+        }
+    }
+    L.geoJSON(ornRiversGeoJSONData, {style: style}).addTo(map);
 
     // add catchment hexagon river data and add click/mouseover function to update wordcloud
     // make invisible
