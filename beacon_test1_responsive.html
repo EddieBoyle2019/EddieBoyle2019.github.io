@@ -38,6 +38,9 @@
     <script type="text/javascript" src="rivers_hex_ll.js"></script>
     -->
 
+    <!--Dams data (GeoJSON)-->
+    <script type="text/javascript" src="data/tehri_fps_LL.js"></script>
+
     <!--Custom CSS-->
     <link rel="stylesheet" href="beacon_test1_responsive.css" type="text/css">
 
@@ -49,13 +52,13 @@
 
     <!--Bootstrap responsive navbar-->
 	<div>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #A8D5E3;"> <!-- Dark Blue Background -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #00447B;"> <!-- Dark Blue Background -->
             <div class="container-fluid text-wrap">
-                <a class="navbar-brand">
-                    <!--
+                <!--
+                <a class="navbar-brand">             
                     <img src="logo.png" alt="F2O" class="logo" style="height: 60px">
-                    -->
                 </a> 
+                -->
                 <div id="title">Beacon Dams Prototype</div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -103,7 +106,7 @@
 	// OS Data Hub API Key
 	//const apiKey = 'hY9nIzYSGV9A9kaF8ScWbl7wghXs6P6j';
 
-    /* Use for API key authentication */
+    /* Use for ArcGIS API key authentication */
     const accessToken = "AAPTaI_o3_7Avd7QUw-Us0cgKwg..U1hHJcIf-ZkzA7syJ4FasQ1TCHYpOrgvqNO5tzXNGoud_TJ_a_IdHx65CJ70pyheF4X8E2juP9EPSbwp_soCFt0P0EAVGQW9LQExRjHkhPAQ1WIeO3RcQOAPBGnksjyt5bW9jHmStn5cEoMOAAeXh8Gy5RVtxi0yocax7PLDXpX8AwZykHLbZEiGktuAMJyLZO-lRL-aDyzkB0AUxIg0Ss4xQXrzcTclFKRKtNXk5xK4TJ6KOHkc0cGcAT1_K1GJab9w";
 
     // initialize the map.
@@ -115,12 +118,26 @@
       map.setView([30, -20], 3);
 
       //const basemapEnum = "arcgis/outdoor";
-        //const basemapEnum = "arcgis/streets-relief/base";
+      //const basemapEnum = "arcgis/streets-relief/base";
       const basemapEnum = "arcgis/streets-relief";
 
       L.esri.Vector.vectorBasemapLayer(basemapEnum, {
         token: accessToken
       }).addTo(map);
+
+    //Load Dam data and display on map
+    let Style1 = {
+        //"color": "#ff7800",
+        "color": "#00447B",
+        "weight": 3,
+        "opacity": 0.8
+    };
+    L.geoJSON(tehri_fps_LL_GeoJSONData, {
+        //weight: 0.2,
+        //color: '#00447B;',
+        //fillOpacity: 0.7,
+        style: Style1
+    }).addTo(map);
 
 /*
     const mapOptions = {
